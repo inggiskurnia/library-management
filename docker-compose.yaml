@@ -1,0 +1,27 @@
+services:
+
+  # Postgresql
+  postgres:
+    image: postgres:15
+    container_name: summit-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5446:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - backend
+
+
+volumes:
+  pgdata:
+  redis_data:
+
+networks:
+  backend:
+
+name: summit
