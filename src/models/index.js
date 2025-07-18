@@ -4,7 +4,6 @@ const Book = require('./book');
 const Member = require('./member');
 const Borrowing = require('./borrowing');
 
-// Associations
 Book.hasMany(Borrowing, { foreignKey: 'book_id' });
 Borrowing.belongsTo(Book, { foreignKey: 'book_id' });
 

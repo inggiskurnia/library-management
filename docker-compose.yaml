@@ -1,6 +1,5 @@
 services:
 
-  # Postgresql
   postgres:
     image: postgres:15
     container_name: summit-db

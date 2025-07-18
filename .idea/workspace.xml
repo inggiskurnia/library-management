@@ -5,19 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="38929f30-067a-4074-b282-4fd8cb360341" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/docker-compose.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/config/database.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/controllers/bookController.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/book.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/borrowing.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/member.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/bookRoutes.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/bookService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/database.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/database.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +99,7 @@
       <updated>1752826807841</updated>
       <workItem from="1752826808977" duration="202000" />
       <workItem from="1752828550309" duration="69000" />
-      <workItem from="1752828627676" duration="5606000" />
+      <workItem from="1752828627676" duration="6582000" />
     </task>
     <servers />
   </component>
