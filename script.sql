@@ -27,7 +27,7 @@ id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 book_id UUID REFERENCES books(id),
 member_id UUID REFERENCES members(id),
 borrow_date DATE NOT NULL,
-return_date DATE,
+return_date DATE,	
 status VARCHAR(10) NOT NULL DEFAULT 'BORROWED',
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
