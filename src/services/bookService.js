@@ -2,15 +2,38 @@ const {Op} = require("sequelize");
 const { Book } = require('../models');
 
 const createBook = async (data) => {
-    return Book.create(data);
+    const { title, author, publishedYear } = data;
+
+    if (!title || typeof title !== 'string' || title.trim() === '') {
+        throw new Error('Title is required and must be a non-empty string.');
+    }
+
+    if (!author || typeof author !== 'string' || author.trim() === '') {
+        throw new Error('Author is required and must be a non-empty string.');
+    }
+
+    if (publishedYear && isNaN(publishedYear)) {
+        throw new Error('Published year must be a number if provided.');
+    }
+
+    return await Book.create({
+        title: title.trim(),
+        author: author.trim(),
+        publishedYear,
+    });
 };
 
 const getPaginatedBooks = async (req) => {
-    let {page = '1', limit = '10', title, author} = req;
+    const {
+        page = '1',
+        limit = '10',
+        title,
+        author
+    } = req || {};
 
-    const pageNum = parseInt(page);
-    const limitNum = parseInt(limit);
-    const offset = (page - 1) * limit;
+    const pageNum = parseInt(page, 10);
+    const limitNum = parseInt(limit, 10);
+    const offset = (pageNum - 1) * limitNum;
 
     const whereClause = {};
 
