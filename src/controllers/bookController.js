@@ -9,14 +9,14 @@ exports.create = async (req, res) => {
     }
 };
 
-exports.findAll = async (req, res) => {
+exports.findPagination = async (req, res) => {
     try {
-        const books = await bookService.getAllBooks();
-        res.json(books);
+        const result = await bookService.getPaginatedBooks(req.query);
+        res.json(result);
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
-};
+}
 
 exports.findOne = async (req, res) => {
     try {
