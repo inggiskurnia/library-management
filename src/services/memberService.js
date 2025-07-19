@@ -1,5 +1,4 @@
-const {Member} = require('../models');
-const {createBook} = require("./bookService");
+const {Member, Borrowing, Book} = require('../models');
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const phoneRegex = /^\+?\d{9,15}$/;
@@ -32,6 +31,34 @@ const createMember = async (data) => {
     });
 }
 
+const getMemberBorrowings = async (memberId, { status, page = '1', limit = '10' }) => {
+
+    const pageNum = parseInt(page, 10);
+    const limitNum = parseInt(limit, 10);
+    const offset = (page - 1) * limitNum;
+
+    const whereClause = { member_id: memberId };
+    if (status) {
+        whereClause.status = status;
+    }
+
+    const {count, rows} = await Borrowing.findAndCountAll({
+        where: whereClause,
+        include: [{ model: Book }],
+        limit,
+        offset,
+        order: [['borrow_date', 'DESC']],
+    });
+
+    return {
+        totalItems: count,
+        totalPages: Math.ceil(count / limitNum),
+        currentPage: pageNum,
+        items: rows,
+    };
+};
+
 module.exports ={
     createMember,
+    getMemberBorrowings,
 }
