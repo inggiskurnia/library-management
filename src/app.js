@@ -4,9 +4,14 @@ const express = require('express');
 const app = express();
 const db = require('./models');
 const bookRoutes = require('./routes/bookRoutes');
+const memberRoutes = require('./routes/memberRoutes');
+const borrowingRoutes = require('./routes/borrowingRoutes');
 
 app.use(express.json());
+
 app.use('/books', bookRoutes);
+app.use('/member', memberRoutes)
+app.use('/borrowing', borrowingRoutes)
 
 const PORT = process.env.PORT || 3000;
 

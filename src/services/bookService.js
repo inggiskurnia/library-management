@@ -2,7 +2,7 @@ const {Op} = require("sequelize");
 const { Book } = require('../models');
 
 const createBook = async (data) => {
-    const { title, author, publishedYear } = data;
+    const { title, author, publishedYear, stock, isbn } = data;
 
     if (!title || typeof title !== 'string' || title.trim() === '') {
         throw new Error('Title is required and must be a non-empty string.');
@@ -16,10 +16,25 @@ const createBook = async (data) => {
         throw new Error('Published year must be a number if provided.');
     }
 
+    if (typeof stock !== 'number' || stock < 0) {
+        throw new Error('Stock is required and must be a non-negative number.');
+    }
+
+    if (typeof isbn !== 'string' || isbn === '') {
+        throw new Error('ISBN is required and must be a number.');
+    }
+
+    const existingBook = await Book.findOne({ where: { isbn } });
+    if (existingBook) {
+        throw new Error('A book with the same ISBN already exists.');
+    }
+
     return await Book.create({
         title: title.trim(),
         author: author.trim(),
-        publishedYear,
+        published_year: publishedYear,
+        stock,
+        isbn
     });
 };
 
@@ -59,26 +74,7 @@ const getPaginatedBooks = async (req) => {
     };
 }
 
-const getBookById = async (id) => {
-    return await Book.findByPk(id);
-};
-
-const updateBook = async (id, data) => {
-    const book = await Book.findByPk(id);
-    if (!book) throw new Error('Book not found');
-    return await book.update(data);
-};
-
-const deleteBook = async (id) => {
-    const book = await Book.findByPk(id);
-    if (!book) throw new Error('Book not found');
-    return await book.destroy();
-};
-
 module.exports = {
     createBook,
     getPaginatedBooks,
-    getBookById,
-    updateBook,
-    deleteBook,
 };
