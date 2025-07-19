@@ -1,5 +1,4 @@
 const {Borrowing, Book, Member} = require('../models');
-const {createBook} = require("./bookService");
 
 const createBorrowing = async (data) => {
     const {bookId, memberId} = data;
@@ -45,6 +44,47 @@ const createBorrowing = async (data) => {
     }
 }
 
+const returnBook = async (borrowingId) => {
+    const borrowing = await Borrowing.findByPk(borrowingId);
+
+    if (!borrowing) {
+        throw new Error('Borrowing record not found.');
+    }
+
+    if (borrowing.return_date) {
+        throw new Error('Book has already been returned.');
+    }
+
+    const book = await Book.findByPk(borrowing.book_id);
+    if (!book) {
+        throw new Error('Book not found.');
+    }
+
+    const t = await Borrowing.sequelize.transaction();
+
+    try {
+        await borrowing.update(
+            {
+                return_date: new Date(),
+                status: 'RETURNED',
+            },
+            { transaction: t }
+        );
+
+        await book.update(
+            { stock: book.stock + 1 },
+            { transaction: t }
+        );
+
+        await t.commit();
+        return borrowing;
+    } catch (err) {
+        await t.rollback();
+        throw err;
+    }
+};
+
 module.exports = {
     createBorrowing,
+    returnBook,
 }
